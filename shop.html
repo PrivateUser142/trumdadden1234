@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TrumCayThue</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0; /* Remove default body margin */
+            background-size: cover; /* Cover the entire viewport */
+            background-repeat: no-repeat; /* Prevent image repetition */
+            color: #333; /* Dark gray text color for better contrast */
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for the container */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ... (rest of your CSS styles remain the same) */
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label { /* ... */ }
+        select, input[type="number"] { /* ... */ }
+        button { /* ... */ }
+        #account-price { /* ... */ }
+        body {
+    font-family: sans-serif;
+    margin: 0;
+    background-image: url("https://tr.rbxcdn.com/180DAY-b0959a20347ca861871f2bc71a3d3a58/500/280/Image/Jpeg/noFilter");
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #333; /* Dark gray text for better contrast */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    min-height: 100vh; /* Ensure full viewport height */
+}
+
+.container {
+    width: 400px; /* Adjust width as needed */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #ff00ff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555; /* Slightly lighter gray for labels */
+}
+
+select,
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Make button full width */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#account-price {
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+/* Optional: Add some spacing between elements */
+.container > * {
+    margin-bottom: 10px; /* Add margin to direct children of .container */
+}
+
+.container > *:last-child {
+    margin-bottom: 0; /* Remove bottom margin from the last element */
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cày Beli</h1>
+
+        <label for="nick-option">Nick Option:</label>
+        <select id="nick-option" name="nick-option">
+            <option value="1">5M Beli</option>
+            <option value="2">10M Beli</option>
+            <option value="3">20M Beli</option>
+            <option value="4">50M Beli</option>
+            <option value="5">100M Beli</option>
+            <option value="6">200M Beli</option>
+        </select>
+
+        <label for="account-quantity">Quantity:</label>
+        <input type="number" id="account-quantity" name="account-quantity" value="1" min="1">
+
+        <label for="account-price">Price:</label>
+        <span id="account-price">Calculating...</span>
+
+        <button onclick="purchaseAccount()">Thuê</button>
+    </div>
+
+    <script>
+        const nickOptionSelect = document.getElementById('nick-option');
+const accountQuantityInput = document.getElementById('account-quantity');
+const accountPriceSpan = document.getElementById('account-price');
+
+// Example price list (replace with actual data)
+const prices = {
+    "1": 5000, 
+    "2": 10000,  
+    "3": 20000,
+    "4": 50000,
+    "5": 100000,
+    "6": 200000
+
+};
+
+function updatePrice() {
+    const selectedOption = nickOptionSelect.value;
+    const quantity = parseInt(accountQuantityInput.value); // Parse quantity as an integer
+
+    // Check if the quantity is a valid number and greater than 0
+    if (isNaN(quantity) || quantity < 1) {
+        accountPriceSpan.textContent = "Invalid Quantity";
+        return; // Exit the function early if quantity is invalid
+    }
+
+    const pricePerItem = prices[selectedOption];
+
+    if (pricePerItem === undefined) { // Check if the price is defined for the selected option
+        accountPriceSpan.textContent = "Price Not Found";
+        return; // Exit if the price is not found
+    }
+
+    const totalPrice = pricePerItem * quantity;
+    accountPriceSpan.textContent = totalPrice.toLocaleString() + " VND"; // Format with commas
+}
+
+nickOptionSelect.addEventListener('change', updatePrice);
+accountQuantityInput.addEventListener('input', updatePrice); // Update on quantity change
+
+// Initial price calculation
+updatePrice();
+
+function purchaseAccount() {
+    // In a real application, this would send data to your server
+    // for processing the purchase.  You'd need server-side code
+    // to handle payments, account creation, etc.
+    alert("Purchase clicked (This is a placeholder)");
+    window.location.href = "https://www.roblox.com/home"; // Replace with your actual URL
+    window.open("https://www.roblox.com/home", "_blank");
+    const newURL = "https://www.roblox.com/home?option=" + selectedOption + "&quantity=" + quantity;
+window.location.href = newURL; // Or window.open(newURL, "_blank");
+// On your-new-website.com:
+const urlParams = new URLSearchParams(window.location.search);
+const selectedOption = urlParams.get('option');
+const quantity = urlParams.get('quantity');
+
+console.log("Option:", selectedOption);
+console.log("Quantity:", quantity);
+}
+    </script>
+
+</body>
+</html>
